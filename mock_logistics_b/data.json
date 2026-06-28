@@ -1,0 +1,1396 @@
+[
+  {
+    "id": "b-1000",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T05:39:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Lukas M\u00fcller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1001",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T11:18:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1002",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T15:13:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1003",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T13:46:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1004",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T15:39:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Max Schneider",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1005",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T08:00:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1006",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T07:37:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Lukas M\u00fcller",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1007",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T07:11:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1008",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T09:38:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Lukas M\u00fcller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1009",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T06:05:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1010",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T19:19:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Jonas Hoffmann",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1011",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T13:54:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1012",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T16:09:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Martin Schulz",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1013",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T19:25:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Mia Weber",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1014",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T10:38:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Mia Weber",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1015",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T07:09:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Laura Fischer",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1016",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T09:34:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Lukas M\u00fcller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1017",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T06:12:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1018",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T13:26:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Laura Fischer",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1019",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T05:42:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Max Schneider",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1020",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T18:12:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Laura Fischer",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1021",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T19:54:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Lukas M\u00fcller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1022",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T18:46:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1023",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T12:14:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1024",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T07:30:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1025",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T07:09:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Martin Schulz",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1026",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T07:01:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Felix Keller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1027",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T09:25:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Mia Weber",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1028",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T19:37:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": null
+  },
+  {
+    "id": "b-1029",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T06:35:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Sophie Wagner",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1030",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T08:18:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1031",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T09:26:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1032",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T20:34:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Max Schneider",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1033",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T05:53:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Felix Keller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1034",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T17:03:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Martin Schulz",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1035",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T10:07:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Laura Fischer",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1036",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T11:32:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Sophie Wagner",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1037",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T12:49:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Martin Schulz",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1038",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T05:27:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Felix Keller",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1039",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T20:09:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Felix Keller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1040",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T14:52:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Jonas Hoffmann",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1041",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T07:13:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Max Schneider",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1042",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T09:15:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1043",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T14:39:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Max Schneider",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1044",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T11:25:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1045",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T08:11:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1046",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T10:20:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Felix Keller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1047",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T14:13:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Lukas M\u00fcller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1048",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T08:24:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Martin Schulz",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1049",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T16:56:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1050",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T17:00:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Lukas M\u00fcller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1051",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T08:48:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Sophie Wagner",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1052",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T09:52:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Mia Weber",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1053",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T17:20:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Mia Weber",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1054",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T20:34:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Felix Keller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1055",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T19:25:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1056",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T17:21:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Felix Keller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1057",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T06:12:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1058",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T15:20:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Martin Schulz",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1059",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T18:38:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1060",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T08:12:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1061",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T06:01:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Lukas M\u00fcller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1062",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T12:53:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Jonas Hoffmann",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1063",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T10:50:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Mia Weber",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1064",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T13:30:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1065",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T10:40:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1066",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T16:55:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Laura Fischer",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1067",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T19:16:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Sophie Wagner",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1068",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T11:23:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Max Schneider",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1069",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T19:08:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Jonas Hoffmann",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1070",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T15:52:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Lukas M\u00fcller",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1071",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T18:27:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Sophie Wagner",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1072",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T13:39:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Sophie Wagner",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1073",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T20:27:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Max Schneider",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1074",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T08:10:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": null
+  },
+  {
+    "id": "b-1075",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T11:11:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1076",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T13:33:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1077",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T14:44:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Felix Keller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1078",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T05:52:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1079",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T15:46:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Felix Keller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1080",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T14:15:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1081",
+    "provider": "SupplierB4",
+    "deliveredAt": "2025-08-01T16:31:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Mia Weber",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1082",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T18:57:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Jonas Hoffmann",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1083",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T12:38:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1084",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T12:16:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Lukas M\u00fcller",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1085",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T11:07:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1086",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T06:30:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Laura Fischer",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1087",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T05:23:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Laura Fischer",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1088",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T10:32:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Max Schneider",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1089",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T15:49:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Anna Becker",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1090",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T20:15:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Sophie Wagner",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1091",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T05:43:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Martin Schulz",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1092",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T06:41:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Martin Schulz",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1093",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T15:30:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Sophie Wagner",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1094",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T09:44:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1095",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T18:30:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Laura Fischer",
+      "signed": true
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  },
+  {
+    "id": "b-1096",
+    "provider": "SupplierB3",
+    "deliveredAt": "2025-08-01T12:00:00+00:00",
+    "statusCode": "PENDING",
+    "receiver": {
+      "name": "Max Schneider",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-1",
+      "address": "Leopoldstra\u00dfe 234, 80807 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1097",
+    "provider": "SupplierB2",
+    "deliveredAt": "2025-08-01T12:50:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Clara Braun",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "munich-schwabing-2",
+      "address": "Hohenzollernstra\u00dfe 11, 80801 M\u00fcnchen"
+    }
+  },
+  {
+    "id": "b-1098",
+    "provider": "SupplierB1",
+    "deliveredAt": "2025-08-01T12:33:00+00:00",
+    "statusCode": "FAILED",
+    "receiver": {
+      "name": "Mia Weber",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "berlin-mitte-1",
+      "address": "Friedrichstra\u00dfe 88, 10117 Berlin"
+    }
+  },
+  {
+    "id": "b-1099",
+    "provider": "SupplierB5",
+    "deliveredAt": "2025-08-01T13:55:00+00:00",
+    "statusCode": "OK",
+    "receiver": {
+      "name": "Mia Weber",
+      "signed": false
+    },
+    "destination": {
+      "siteRef": "hamburg-port-1",
+      "address": "Am Sandtorkai 4, 20457 Hamburg"
+    }
+  }
+]
