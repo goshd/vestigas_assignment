@@ -111,6 +111,7 @@ The repository includes pytest coverage for:
 
 - normalization logic
 - fetch behavior and error handling
+- malformed partner record skipping
 - deduplication behavior
 - pagination validation
 - site-level reads
@@ -174,7 +175,7 @@ The storage model can already handle future incremental updates because it upser
 
 ### Domain interpretation gaps
 
-Two domain questions remain unresolved by the brief and were left to future domain experts:
+Some domain questions remain unresolved and were left to future domain experts. Below two such examples:
 
 1. The partners use different status terminology (for example one uses `OK` and another uses `Delivered`). It is not yet clear whether those should be treated as equivalent values or kept distinct in normalized data.
 2. The brief does not define how to interpret ambiguous partner statuses such as one partner reporting `failed` and another reporting `cancelled`. That decision should be made with domain experts before the normalization rules are finalized.
@@ -183,6 +184,11 @@ Two domain questions remain unresolved by the brief and were left to future doma
 
 The current implementation is intentionally focused on the core integration path and the business rules from the assignment. If this were to move toward production, the next steps would be:
 
+- clear up data model and data intepretation ambiguity with domain experts for more advanced malformation handling
+- turn the synchronous fetch request into a persisted fetch job so the caller does not have to wait for the partners
+-  store fetch attempts in Postgres, for example in a `fetch_runs` table with a `startedAt` timestamp, and enforce the guard inside a database transaction before calling partners to avoid load doubling with multiple replicas and across multiple runs
+- add pagination if the partner APIs expose cursors or pages in the future
+- use async fetch jobs if pagination support is added
 - add proper observability and logging
 - add retry and backoff for partner failures
 - support incremental or paged partner fetches
