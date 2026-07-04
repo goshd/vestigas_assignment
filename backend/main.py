@@ -15,6 +15,7 @@ LOGISTICS_A_URL = os.getenv("LOGISTICS_A_URL", "http://mock_a:8000/api/logistics
 LOGISTICS_B_URL = os.getenv("LOGISTICS_B_URL", "http://mock_b:8000/api/logistics-b")
 DATABASE_URL = os.getenv("DATABASE_URL")
 FETCH_DEDUP_WINDOW_SECONDS = 120
+DB_ERRORS = (asyncpg.PostgresError, asyncpg.InterfaceError, OSError)
 
 CREATE_DELIVERIES_TABLE = """
 CREATE TABLE IF NOT EXISTS deliveries (
@@ -201,10 +202,16 @@ async def fetch_partner(
             raise ValueError("partner returned a non-list payload")
         result.fetched = len(payload)
 
-        async with pool.acquire() as conn:
-            for raw_record in payload:
-                try:
-                    delivery = normalizer(raw_record)
+        try:
+            async with pool.acquire() as conn:
+                for raw_record in payload:
+                    try:
+                        delivery = normalizer(raw_record)
+                    except (KeyError, TypeError, ValueError) as exc:
+                        logger.warning("Skipping malformed %s record: %s", partner, exc)
+                        result.skipped += 1
+                        continue
+
                     await conn.execute(
                         UPSERT_DELIVERY,
                         delivery["deliveryId"],
@@ -217,9 +224,9 @@ async def fetch_partner(
                         delivery["address"],
                     )
                     result.stored += 1
-                except (KeyError, TypeError, ValueError) as exc:
-                    logger.warning("Skipping malformed %s record: %s", partner, exc)
-                    result.skipped += 1
+        except DB_ERRORS as exc:
+            result.error = "database write failed"
+            logger.exception("Failed to store %s deliveries: %s", partner, exc)
     except (httpx.HTTPError, ValueError) as exc:
         result.error = str(exc)
         logger.warning("Failed to fetch %s: %s", partner, exc)
@@ -289,19 +296,23 @@ async def list_operations_deliveries(
     offset: int = Query(0, ge=0),
 ):
     pool = await get_db_pool()
-    async with pool.acquire() as conn:
-        rows = await conn.fetch(
-            f"""
-            SELECT
-                "deliveryId", supplier, "timestamp", status, signed, signee, "destinationCode", address,
-                {DELIVERY_SCORE_SQL}
-            FROM deliveries
-            ORDER BY "deliveryScore" DESC, "timestamp" DESC, "deliveryId" ASC
-            LIMIT $1 OFFSET $2
-            """,
-            limit,
-            offset,
-        )
+    try:
+        async with pool.acquire() as conn:
+            rows = await conn.fetch(
+                f"""
+                SELECT
+                    "deliveryId", supplier, "timestamp", status, signed, signee, "destinationCode", address,
+                    {DELIVERY_SCORE_SQL}
+                FROM deliveries
+                ORDER BY "deliveryScore" DESC, "timestamp" DESC, "deliveryId" ASC
+                LIMIT $1 OFFSET $2
+                """,
+                limit,
+                offset,
+            )
+    except DB_ERRORS as exc:
+        logger.exception("Failed to read operations deliveries: %s", exc)
+        raise HTTPException(status_code=503, detail="Database read failed") from exc
     return [row_to_delivery(row) for row in rows]
 
 
@@ -313,21 +324,25 @@ async def list_site_deliveries(
     offset: int = Query(0, ge=0),
 ):
     pool = await get_db_pool()
-    async with pool.acquire() as conn:
-        rows = await conn.fetch(
-            f"""
-            SELECT
-                "deliveryId", supplier, "timestamp", status, signed, signee, "destinationCode", address,
-                {DELIVERY_SCORE_SQL}
-            FROM deliveries
-            WHERE "destinationCode" = $1
-              AND ("timestamp" AT TIME ZONE 'UTC')::date = $2
-            ORDER BY "timestamp" ASC, "deliveryId" ASC
-            LIMIT $3 OFFSET $4
-            """,
-            destination_code,
-            delivery_date,
-            limit,
-            offset,
-        )
+    try:
+        async with pool.acquire() as conn:
+            rows = await conn.fetch(
+                f"""
+                SELECT
+                    "deliveryId", supplier, "timestamp", status, signed, signee, "destinationCode", address,
+                    {DELIVERY_SCORE_SQL}
+                FROM deliveries
+                WHERE "destinationCode" = $1
+                  AND ("timestamp" AT TIME ZONE 'UTC')::date = $2
+                ORDER BY "timestamp" ASC, "deliveryId" ASC
+                LIMIT $3 OFFSET $4
+                """,
+                destination_code,
+                delivery_date,
+                limit,
+                offset,
+            )
+    except DB_ERRORS as exc:
+        logger.exception("Failed to read site deliveries: %s", exc)
+        raise HTTPException(status_code=503, detail="Database read failed") from exc
     return [row_to_delivery(row) for row in rows]

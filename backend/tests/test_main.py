@@ -34,15 +34,21 @@ class FakePool:
 
 
 class FakeConnection:
-    def __init__(self, rows=None):
+    def __init__(self, rows=None, execute_error=None, fetch_error=None):
         self.rows = rows or []
+        self.execute_error = execute_error
+        self.fetch_error = fetch_error
         self.executed = []
         self.fetches = []
 
     async def execute(self, query, *args):
+        if self.execute_error:
+            raise self.execute_error
         self.executed.append((query, args))
 
     async def fetch(self, query, *args):
+        if self.fetch_error:
+            raise self.fetch_error
         self.fetches.append((query, args))
         return self.rows
 
@@ -247,6 +253,41 @@ async def test_fetch_partner_stores_valid_records_and_skips_malformed_records():
 
 
 @pytest.mark.asyncio
+async def test_fetch_partner_reports_database_write_error_separately_from_skips():
+    conn = FakeConnection(execute_error=OSError("database connection lost"))
+    pool = FakePool(conn)
+    client = FakePartnerClient(
+        {
+            "http://partner-a.test": FakeResponse(
+                [
+                    {
+                        "deliveryId": "DEL-001-A",
+                        "supplier": "Innotech",
+                        "timestamp": "2025-08-01T05:30:00Z",
+                        "status": "delivered",
+                        "signedBy": "Sophie Wagner",
+                        "siteCode": "munich-schwabing-1",
+                    }
+                ]
+            )
+        }
+    )
+
+    result = await main.fetch_partner(
+        client,
+        pool,
+        "logistics_a",
+        "http://partner-a.test",
+        main.normalize_logistics_a,
+    )
+
+    assert result.fetched == 1
+    assert result.stored == 0
+    assert result.skipped == 0
+    assert result.error == "database write failed"
+
+
+@pytest.mark.asyncio
 async def test_fetch_all_partners_keeps_success_when_one_partner_fails(monkeypatch):
     conn = FakeConnection()
     pool = FakePool(conn)
@@ -347,6 +388,18 @@ async def test_operations_deliveries_returns_scored_records_in_default_query_sha
 
 
 @pytest.mark.asyncio
+async def test_operations_deliveries_returns_503_when_database_read_fails():
+    conn = FakeConnection(fetch_error=OSError("database unavailable"))
+    main.app.state.db_pool = FakePool(conn)
+
+    async with AsyncClient(transport=ASGITransport(app=main.app), base_url="http://test") as ac:
+        response = await ac.get("/operations/deliveries")
+
+    assert response.status_code == 503
+    assert response.json() == {"detail": "Database read failed"}
+
+
+@pytest.mark.asyncio
 async def test_site_deliveries_filters_by_site_and_utc_date():
     conn = FakeConnection(rows=[delivery_row(deliveryId="b-1024")])
     main.app.state.db_pool = FakePool(conn)
@@ -362,6 +415,18 @@ async def test_site_deliveries_filters_by_site_and_utc_date():
     assert 'WHERE "destinationCode" = $1' in query
     assert '("timestamp" AT TIME ZONE' in query
     assert args == ("munich-schwabing-1", date(2025, 8, 1), 20, 2)
+
+
+@pytest.mark.asyncio
+async def test_site_deliveries_returns_503_when_database_read_fails():
+    conn = FakeConnection(fetch_error=OSError("database unavailable"))
+    main.app.state.db_pool = FakePool(conn)
+
+    async with AsyncClient(transport=ASGITransport(app=main.app), base_url="http://test") as ac:
+        response = await ac.get("/sites/munich-schwabing-1/deliveries?date=2025-08-01")
+
+    assert response.status_code == 503
+    assert response.json() == {"detail": "Database read failed"}
 
 
 @pytest.mark.asyncio
