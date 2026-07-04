@@ -1,4 +1,4 @@
-from datetime import date, datetime, timezone
+from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 import sys
 
@@ -98,6 +98,20 @@ def delivery_row(**overrides):
     }
     row.update(overrides)
     return row
+
+
+def calculate_delivery_score(signed: bool, timestamp: datetime | None) -> float:
+    base_score = 1.0 if signed else 0.3
+    if timestamp is None:
+        return base_score
+
+    if timestamp.tzinfo is None:
+        timestamp = timestamp.replace(tzinfo=timezone.utc)
+    else:
+        timestamp = timestamp.astimezone(timezone.utc)
+
+    is_morning = time(5, 0) <= timestamp.time() < time(11, 0)
+    return base_score * 1.2 if is_morning else base_score
 
 
 @pytest.fixture(autouse=True)
@@ -397,6 +411,159 @@ async def test_operations_deliveries_returns_503_when_database_read_fails():
 
     assert response.status_code == 503
     assert response.json() == {"detail": "Database read failed"}
+
+
+@pytest.mark.parametrize(
+    ("timestamp", "signed", "expected"),
+    [
+        (datetime(2025, 8, 1, 5, 0, tzinfo=timezone.utc), True, 1.2),
+        (datetime(2025, 8, 1, 11, 0, tzinfo=timezone.utc), True, 1.0),
+        (datetime(2025, 8, 1, 4, 59, tzinfo=timezone.utc), True, 1.0),
+        (datetime(2025, 8, 1, 11, 1, tzinfo=timezone.utc), True, 1.0),
+        (datetime(2025, 8, 1, 5, 30, tzinfo=timezone.utc), False, 0.36),
+    ],
+)
+def test_calculate_delivery_score_applies_morning_boundaries(timestamp, signed, expected):
+    assert calculate_delivery_score(signed, timestamp) == pytest.approx(expected)
+
+
+@pytest.mark.asyncio
+async def test_operations_fetch_reports_failed_when_both_partners_error(monkeypatch):
+    main.app.state.db_pool = FakePool(FakeConnection())
+
+    async def fake_fetch_all_partners(client, pool):
+        return [
+            main.PartnerFetchResult(partner="logistics_a", error="partner a down"),
+            main.PartnerFetchResult(partner="logistics_b", error="partner b down"),
+        ]
+
+    monkeypatch.setattr(main, "fetch_all_partners", fake_fetch_all_partners)
+
+    async with AsyncClient(transport=ASGITransport(app=main.app), base_url="http://test") as ac:
+        response = await ac.post("/operations/fetch")
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "failed"
+    assert response.json()["stored"] == 0
+
+
+@pytest.mark.asyncio
+async def test_fetch_partner_reports_non_list_payload_as_error():
+    conn = FakeConnection()
+    pool = FakePool(conn)
+    client = FakePartnerClient({"http://partner-a.test": FakeResponse({"ok": True})})
+
+    result = await main.fetch_partner(
+        client,
+        pool,
+        "logistics_a",
+        "http://partner-a.test",
+        main.normalize_logistics_a,
+    )
+
+    assert result.fetched == 0
+    assert result.stored == 0
+    assert result.skipped == 0
+    assert result.error == "partner returned a non-list payload"
+
+
+@pytest.mark.parametrize("status_code", [500, 503])
+@pytest.mark.asyncio
+async def test_fetch_partner_reports_http_status_errors(status_code):
+    conn = FakeConnection()
+    pool = FakePool(conn)
+    client = FakePartnerClient({"http://partner-a.test": FakeResponse(status_code=status_code)})
+
+    result = await main.fetch_partner(
+        client,
+        pool,
+        "logistics_a",
+        "http://partner-a.test",
+        main.normalize_logistics_a,
+    )
+
+    assert result.fetched == 0
+    assert result.stored == 0
+    assert result.error is not None
+
+
+@pytest.mark.asyncio
+async def test_fetch_partner_skips_record_with_invalid_timestamp_format():
+    conn = FakeConnection()
+    pool = FakePool(conn)
+    client = FakePartnerClient(
+        {
+            "http://partner-a.test": FakeResponse(
+                [
+                    {
+                        "deliveryId": "DEL-INVALID",
+                        "supplier": "Innotech",
+                        "timestamp": "not-a-timestamp",
+                        "status": "delivered",
+                        "signedBy": "Sophie Wagner",
+                        "siteCode": "munich-schwabing-1",
+                    }
+                ]
+            )
+        }
+    )
+
+    result = await main.fetch_partner(
+        client,
+        pool,
+        "logistics_a",
+        "http://partner-a.test",
+        main.normalize_logistics_a,
+    )
+
+    assert result.fetched == 1
+    assert result.stored == 0
+    assert result.skipped == 1
+    assert result.error is None
+
+
+@pytest.mark.parametrize("query_string", ["/operations/deliveries?limit=0", "/operations/deliveries?limit=10001"])
+@pytest.mark.asyncio
+async def test_operations_deliveries_pagination_validation_returns_422(query_string):
+    async with AsyncClient(transport=ASGITransport(app=main.app), base_url="http://test") as ac:
+        response = await ac.get(query_string)
+
+    assert response.status_code == 422
+
+
+@pytest.mark.asyncio
+async def test_site_endpoint_returns_empty_list_for_missing_site_date():
+    conn = FakeConnection(rows=[])
+    main.app.state.db_pool = FakePool(conn)
+
+    async with AsyncClient(transport=ASGITransport(app=main.app), base_url="http://test") as ac:
+        response = await ac.get("/sites/unknown-site/deliveries?date=2025-08-01")
+
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+@pytest.mark.asyncio
+async def test_operations_fetch_allows_new_fetch_after_dedup_window(monkeypatch):
+    main.app.state.db_pool = FakePool(FakeConnection())
+    main.last_fetch_started_at = datetime.now(timezone.utc) - timedelta(seconds=121)
+    calls = []
+
+    async def fake_fetch_all_partners(client, pool):
+        calls.append((client, pool))
+        return [
+            main.PartnerFetchResult(partner="logistics_a", fetched=1, stored=1),
+            main.PartnerFetchResult(partner="logistics_b", fetched=1, stored=1),
+        ]
+
+    monkeypatch.setattr(main, "fetch_all_partners", fake_fetch_all_partners)
+
+    async with AsyncClient(transport=ASGITransport(app=main.app), base_url="http://test") as ac:
+        response = await ac.post("/operations/fetch")
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "ok"
+    assert len(calls) == 1
 
 
 @pytest.mark.asyncio
