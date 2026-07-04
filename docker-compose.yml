@@ -30,6 +30,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=PathPrefix(`/backend`)"
       - "traefik.http.routers.backend.entrypoints=web"
+      - "traefik.http.middlewares.backend-stripprefix.stripprefix.prefixes=/backend"
+      - "traefik.http.routers.backend.middlewares=backend-stripprefix"
       - "traefik.http.services.backend.loadbalancer.server.port=8000"
     environment:
       - LOGISTICS_A_URL=http://mock_a:8000/api/logistics-a
