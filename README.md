@@ -122,7 +122,7 @@ http://localhost:8000/backend/sites/munich-schwabing-2/deliveries?date=2025-08-0
 The repository includes pytest coverage for:
 
 - normalization logic
-- fetch behavior and error handling
+- fetch behavior and error handling including database read APIs
 - malformed partner record skipping
 - deduplication behavior
 - pagination validation
