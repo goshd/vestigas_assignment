@@ -38,13 +38,8 @@ The service consolidates both partners into one schema:
 - `destinationCode`
 - `address`
 
-The delivery score is computed when reading or evaluating deliveries based on the business rule:
-
-```
-deliveryScore = (signed ? 1.0 : 0.3) × (isMorning ? 1.2 : 1.0)
-```
-
-The morning window is 05:00 to 11:00 UTC.
+The delivery score is computed when reading or evaluating deliveries.
+I chose not to persist a deliveryScore column. It is calculated in the query from signed and timestamp, because the score is fully derived from stored normalized fields. That avoids stale derived data if a delivery is updated by a later fetch, keeps the stored model simpler, and still lets operations sort by score directly in SQL.
 
 ## Decisions
 
@@ -60,6 +55,7 @@ Operations and Construction Site Managers have different query needs, so they ha
 - `GET /sites/{destination_code}/deliveries?date=YYYY-MM-DD` for site-specific queries
 
 This keeps each endpoint focused on its own filtering and sorting requirements.
+Both endpoints support pagination with limit and offset.
 
 ### 3. Fetch endpoint uses POST
 
@@ -118,7 +114,7 @@ The repository includes pytest coverage for:
 - deduplication behavior
 - pagination validation
 - site-level reads
-- end-to-end style endpoint flow
+- end-to-end style endpoint flow (integration test)
 
 Run the tests with:
 
@@ -126,7 +122,64 @@ Run the tests with:
 docker compose run --rm backend pytest -q
 ```
 
-## Notes and next steps
+## Assumptions
+
+### Fetch load doubling
+
+The guard that prevents a second fetch within two minutes is currently stored in Python memory on the running backend process. That means:
+
+- if the backend container restarts, the two-minute memory is lost and a new fetch could be triggered immediately;
+- if the backend were run with multiple workers or multiple replicas, each instance would have its own guard, so duplicate partner calls could still happen.
+
+For this challenge and the single-container scaffold, that is acceptable. For a stronger implementation, I would store fetch attempts in Postgres, for example in a `fetch_runs` table with a `startedAt` timestamp, and enforce the guard inside a database transaction before calling partners.
+
+### Partner unreliability limitation
+
+The current implementation is still synchronous: the caller waits while the backend calls both partners. That is acceptable for the challenge and the current mock APIs. In production, this could evolve into a persisted background fetch job so the API remains responsive during slow or flaky partner calls.
+
+### Pagination
+
+Both read endpoints support `limit` and `offset`.
+
+What I did not add:
+
+- partner filters, because stakeholders explicitly do not care which partner a record came from;
+- status, supplier, or date-range filters for the operations view, because the brief only requires a single prioritized view;
+- arbitrary sort parameters, because operations already defined the default priority sort.
+
+### Malformed partner records
+
+Malformed individual records are skipped, logged as warnings, and the rest of the fetch continues. The fetch response surfaces a `skipped` count per partner so consumers can see that some rows were not stored. Certain malformations could potentially be adjusted during the fetch if the stakeholders provide information on how the malformed data should be interpreted and transformed.
+
+This choice avoids failing the entire run because of one bad record while still preserving visibility into the issue.
+
+### Fresh enough
+
+The current interpretation of “fresh enough” is “fresh after a successful manual fetch.”
+
+`POST /operations/fetch` is synchronous:
+
+1. Operations calls it.
+2. The backend calls both partners.
+3. The backend stores the data.
+4. The response returns counts and errors when the run is complete.
+
+That is reasonable for the mock APIs and the challenge scope. A production version might use asynchronous fetch jobs if partner APIs become slower or more complex.
+
+### Mocks return everything at once
+
+The current implementation assumes each partner returns one full list per request. That matches the current mocks. I treated pagination and incremental sync as future work because the mock partners do not expose cursors, pages, timestamps, or changed-since filters.
+
+The storage model can already handle future incremental updates because it upserts by `deliveryId`, so new rows can be inserted and existing rows updated. The fetch loop itself would need to evolve once real partners expose pagination or delta endpoints.
+
+### Domain interpretation gaps
+
+Two domain questions remain unresolved by the brief and were left to future domain experts:
+
+1. The partners use different status terminology (for example one uses `OK` and another uses `Delivered`). It is not yet clear whether those should be treated as equivalent values or kept distinct in normalized data.
+2. The brief does not define how to interpret ambiguous partner statuses such as one partner reporting `failed` and another reporting `cancelled`. That decision should be made with domain experts before the normalization rules are finalized.
+
+## What's next
 
 The current implementation is intentionally focused on the core integration path and the business rules from the assignment. If this were to move toward production, the next steps would be:
 
