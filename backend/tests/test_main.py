@@ -84,6 +84,49 @@ class FakePartnerClient:
         return response
 
 
+class InMemoryDeliveryPool:
+    def __init__(self):
+        self.rows = {}
+
+    def acquire(self):
+        return FakeAcquire(self)
+
+    async def execute(self, query, *args):
+        delivery_id = args[0]
+        self.rows[delivery_id] = {
+            "deliveryId": args[0],
+            "supplier": args[1],
+            "timestamp": args[2],
+            "status": args[3],
+            "signed": args[4],
+            "signee": args[5],
+            "destinationCode": args[6],
+            "address": args[7],
+            "deliveryScore": calculate_delivery_score(args[4], args[2]),
+        }
+
+    async def fetch(self, query, *args):
+        rows = list(self.rows.values())
+        if 'WHERE "destinationCode" = $1' in query:
+            destination_code = args[0]
+            target_date = args[1]
+            rows = [
+                row
+                for row in rows
+                if row["destinationCode"] == destination_code
+                and row["timestamp"].astimezone(timezone.utc).date() == target_date
+            ]
+        return sorted(
+            rows,
+            key=lambda row: (
+                row["deliveryScore"],
+                row["timestamp"],
+                row["deliveryId"],
+            ),
+            reverse=True,
+        )
+
+
 def delivery_row(**overrides):
     row = {
         "deliveryId": "DEL-1",
@@ -564,6 +607,63 @@ async def test_operations_fetch_allows_new_fetch_after_dedup_window(monkeypatch)
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
     assert len(calls) == 1
+
+
+@pytest.mark.asyncio
+async def test_fetch_and_read_endpoints_return_rows_through_full_flow(monkeypatch):
+    main.app.state.db_pool = InMemoryDeliveryPool()
+
+    async def fake_fetch_all_partners(client, pool):
+        async with pool.acquire() as conn:
+            await conn.execute(
+                main.UPSERT_DELIVERY,
+                "DEL-100",
+                "Acme",
+                datetime(2025, 8, 1, 5, 30, tzinfo=timezone.utc),
+                "delivered",
+                True,
+                "Ada Lovelace",
+                "munich-schwabing-1",
+                None,
+            )
+            await conn.execute(
+                main.UPSERT_DELIVERY,
+                "DEL-101",
+                "Acme",
+                datetime(2025, 8, 1, 15, 0, tzinfo=timezone.utc),
+                "delivered",
+                False,
+                "",
+                "munich-schwabing-1",
+                "Waldstrasse 1",
+            )
+        return [
+            main.PartnerFetchResult(partner="logistics_a", fetched=2, stored=2),
+            main.PartnerFetchResult(partner="logistics_b", fetched=0, stored=0),
+        ]
+
+    monkeypatch.setattr(main, "fetch_all_partners", fake_fetch_all_partners)
+
+    async with AsyncClient(
+        transport=ASGITransport(app=main.app, root_path="/backend"),
+        base_url="http://test",
+    ) as ac:
+        fetch_response = await ac.post("/backend/operations/fetch")
+        operations_response = await ac.get("/backend/operations/deliveries?limit=10")
+        site_response = await ac.get("/backend/sites/munich-schwabing-1/deliveries?date=2025-08-01")
+
+    assert fetch_response.status_code == 200
+    assert fetch_response.json()["status"] == "ok"
+    assert fetch_response.json()["stored"] == 2
+
+    operations_payload = operations_response.json()
+    assert len(operations_payload) == 2
+    assert {item["deliveryId"] for item in operations_payload} == {"DEL-100", "DEL-101"}
+    assert operations_payload[0]["deliveryScore"] >= operations_payload[1]["deliveryScore"]
+
+    site_payload = site_response.json()
+    assert len(site_payload) == 2
+    assert {item["deliveryId"] for item in site_payload} == {"DEL-100", "DEL-101"}
 
 
 @pytest.mark.asyncio
