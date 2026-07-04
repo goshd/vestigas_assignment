@@ -55,7 +55,7 @@ Operations and Construction Site Managers have different query needs, so they ha
 - `GET /sites/{destination_code}/deliveries?date=YYYY-MM-DD` for site-specific queries
 
 This keeps each endpoint focused on its own filtering and sorting requirements.
-Both endpoints support pagination with limit and offset.
+Both endpoints support pagination with limit and offset. The limit is intentionally left at 200 to demonstrate that all of the data is being fetched.
 
 ### 3. Fetch endpoint uses POST
 
@@ -104,6 +104,18 @@ docker compose up --build
 ```
 
 The backend service is exposed through the Traefik route prefix `/backend` in the Docker setup.
+
+## Accesssing the endpoints locally:
+
+Operations GET:
+http://localhost:8000/backend/operations/deliveries 
+
+Operations POST:
+http://localhost:8000/backend/operations/fetch
+
+Construction site managers GET (example):
+http://localhost:8000/backend/sites/munich-schwabing-2/deliveries?date=2025-08-01
+
 
 ## Testing
 
@@ -187,7 +199,7 @@ The current implementation is intentionally focused on the core integration path
 - clear up data model and data intepretation ambiguity with domain experts for more advanced malformation handling
 - turn the synchronous fetch request into a persisted fetch job so the caller does not have to wait for the partners
 -  store fetch attempts in Postgres, for example in a `fetch_runs` table with a `startedAt` timestamp, and enforce the guard inside a database transaction before calling partners to avoid load doubling with multiple replicas and across multiple runs
-- add pagination if the partner APIs expose cursors or pages in the future
+- add pagination to the fetch requests if the partner APIs expose cursors or pages in the future
 - use async fetch jobs if pagination support is added
 - add proper observability and logging
 - add retry and backoff for partner failures

@@ -292,7 +292,7 @@ async def fetch_all_partners(client: httpx.AsyncClient, pool: asyncpg.Pool) -> l
 
 @app.get("/operations/deliveries", response_model=list[Delivery])
 async def list_operations_deliveries(
-    limit: int = Query(1000, ge=1, le=10000),
+    limit: int = Query(200, ge=1, le=500),
     offset: int = Query(0, ge=0),
 ):
     pool = await get_db_pool()
