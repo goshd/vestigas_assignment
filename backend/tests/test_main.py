@@ -142,7 +142,7 @@ def delivery_row(**overrides):
     row.update(overrides)
     return row
 
-
+#helper function to test the delivery score as the score is otherwise calculated in the SQL query  
 def calculate_delivery_score(signed: bool, timestamp: datetime | None) -> float:
     base_score = 1.0 if signed else 0.3
     if timestamp is None:

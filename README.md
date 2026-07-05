@@ -127,7 +127,7 @@ The repository includes pytest coverage for:
 - deduplication behavior
 - pagination validation
 - site-level reads
-- end-to-end style endpoint flow (integration test)
+- end-to-end style endpoint flow (integration-style test)
 
 Run the tests with:
 
@@ -206,3 +206,4 @@ The current implementation is intentionally focused on the core integration path
 - support incremental or paged partner fetches
 - add authentication and authorization
 - add schema migrations instead of relying on ad hoc table creation
+- add a real integration test that brings up containers including one for the database
