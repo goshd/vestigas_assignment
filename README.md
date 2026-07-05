@@ -38,6 +38,12 @@ The service consolidates both partners into one schema:
 - `destinationCode`
 - `address`
 
+#### Normalization rules
+The fields from both partners are inserted into the database as follows:
+
+The fields deliveryId and id are inserted in a deliveryId column, fields supplier and provider in a supplier column, fields timestamp and deliveredAt in a timestamp column, fields status and statusCode in a status column, fields signedBy and receiver in separate signed and signee columns whereby if signedBy is empty, signee is left empty and signed set to false, otherwise signee is either set to signedBy if the data comes from mock_logistics_a and signed is set to true or signee is set to the name entry under the receiver field if it comes from mock_logistics_b and signed is set to the signed value under the receiver field. Lastly the siteCode field and the siteRef field under destination are inserted into a destinationCode column and the adress field under destination is inserted in a address column.
+
+#### Delivery score
 The delivery score is computed when reading or evaluating deliveries.
 I chose not to persist a deliveryScore column. It is calculated in the query from signed and timestamp, because the score is fully derived from stored normalized fields. That avoids stale derived data if a delivery is updated by a later fetch, keeps the stored model simpler, and still lets operations sort by score directly in SQL.
 
