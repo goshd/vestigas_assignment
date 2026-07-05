@@ -202,14 +202,12 @@ Some domain questions remain unresolved and were left to future domain experts. 
 
 The current implementation is intentionally focused on the core integration path and the business rules from the assignment. If this were to move toward production, the next steps would be:
 
-- clear up data model and data intepretation ambiguity with domain experts for more advanced malformation handling
-- turn the synchronous fetch request into a persisted fetch job so the caller does not have to wait for the partners
+- clear up data model and data intepretation ambiguity with domain experts for more advanced data normalization and malformation handling
+- turn the synchronous fetch request into a persisted background fetch job so the API remains responsive during slow or flaky partner calls.
 -  store fetch attempts in Postgres, for example in a `fetch_runs` table with a `startedAt` timestamp, and enforce the guard inside a database transaction before calling partners to avoid load doubling with multiple replicas and across multiple runs
 - add pagination to the fetch requests if the partner APIs expose cursors or pages in the future
-- use async fetch jobs if pagination support is added
 - add proper observability and logging
 - add retry and backoff for partner failures
-- support incremental or paged partner fetches
 - add authentication and authorization
 - add schema migrations instead of relying on ad hoc table creation
 - add a real integration test that brings up containers including one for the database
